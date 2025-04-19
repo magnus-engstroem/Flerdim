@@ -1,7 +1,7 @@
-/Flerdim.aux
-/Flerdim.fdb_latexmk
-/Flerdim.fls
-/Flerdim.log
-/Flerdim.out
-/Flerdim.synctex.gz
-/Flerdim.toc
+
+# Ignore everything
+*
+
+# Except the following files
+!Flerdim.pdf
+!Flerdim.tex
