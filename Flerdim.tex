@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{esdiff}
+\usepackage{hyperref}
+
+\setcounter{section}{-1}
+
+
+\title{Vector Calculus}
+\author{Magnus Engstrøm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+
+\section{Introduction}
+
+This document was written (loosely) based on the lectures given by 
+\href{https://www.ntnu.no/ansatte/mats.ehrnstrom}{Mats Ehrnström}
+for the course \href{https://www.ntnu.edu/studies/courses/MA1103#tab=omEmnet}{MA1103 Vector Calculus}
+the \href{https://wiki.math.ntnu.no/ma1103/2022v/start}{spring semester of 2022}. 
+This document is probably relevant for \href{https://www.ntnu.edu/studies/courses/TMA4105#tab=omEmnet}{TMA4105 Mathematics 2}
+
+\subsection{Notation}
+
+(Ignore this section unless some notation is unclear later)
+
+\begin{itemize}
+    \item The notation used for vectors will be both $\vec{x}$ and $\mathbf x$, and we will consider
+    only real vectors, thus:
+    $$\vec{x}, \mathbf y \in \mathbb R^n \quad \textrm{ for } n \geq 2$$
+    $$\vec{x} = \mathbf x$$
+
+    \item $C^m(\mathcal D, \mathcal C)$ is the class of functions $f: \mathcal D \rightarrow \mathcal C$ which are (at least) $m$ times continuously differentiable
+    on the domain $\mathcal D$, and with codomain $\mathcal C$
+
+    \item A set $U$ has border $\partial U$. We will consider sets $U \subseteq \mathbb R^k, \quad k \geq 1$.
+    A point $\mathbf x \in \partial U$ if 
+    $$\forall \epsilon > 0: \quad \{ \mathbf y \in \mathbb R^k; |\mathbf x - \mathbf y| < \epsilon\} \cap U \neq \emptyset \quad \land \quad \{ \mathbf y \in \mathbb R^k; |\mathbf x - \mathbf y| < \epsilon\} \not \subseteq U$$
+
+    If $U = U \cup \partial U$, then $U$ is $closed$, if $\partial U \cap U = \emptyset$ then $U$ is $open$
+    \begin{itemize}
+        \item Note $\{ \mathbf y \in \mathbb R^k; |\mathbf x - \mathbf y| < \epsilon\}$ is just a $k$-dimentional ball with radius $\epsilon$ and center in $\mathbf x$
+    \end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+\section{Geometry}
+
+\subsection{Curves}
+
+\begin{definition}[Parametric curve]
+    A parametric curve $\gamma$ is a continuous function
+    $$\gamma: I \rightarrow \mathbb R^n$$
+    $$ t \mapsto (\gamma_1(t), \gamma_2(t), ..., \gamma_n(t))$$
+    where $I \subseteq \mathbb R$ is an interval
+    
+\end{definition}
+
+\begin{definition}[Smooth curve]
+    $\gamma(t)$ is smooth if
+
+    $$|\dot{\gamma}(t)| = \sqrt{(\dot \gamma_1(t))^2 + (\dot \gamma_2(t))^2 + ... + (\dot \gamma_n(t))^2} \neq 0$$
+    
+\end{definition}
+
+\begin{definition}[Arc length]
+    The arc length on $[a, b]$ is the integral
+    $$L(\gamma) = \int^{b}_{a} ds = \int^{b}_{a} |\dot{\gamma}(t)| dt $$
+
+    Note the element $ ds :=|\dot{\gamma}(t)| dt$
+
+    
+\end{definition}
+\subsection{Polar coordinates}
+
+
+\section{Differentiation}
+
+\subsection{Schwarz' theorem}
+
+\subsection{Jacobi matrix}
+
+\subsection{Hesse matrix}
+
+\subsection{Taylor formulas}
+
+\begin{theorem}[Intermediate value theorem]
+    \label{th:ivt}
+
+    Let $F: U \subseteq \mathbb R^n \rightarrow \mathbb R$, $\mathbf x, \mathbf y \in U$
+    $\gamma: t \mapsto (1-t) \mathbf x + t \mathbf y$ such that $ t \in [0, 1] \Rightarrow \gamma(t) \in U$
+
+    Then: $\exists \tau \in [0, 1];$
+
+    \begin{equation}\label{eq:ivt}
+        F(\mathbf y) - F(\mathbf x) = \nabla F(\gamma(\tau)) \cdot (\mathbf y - \mathbf x)        
+    \end{equation}
+    
+\end{theorem}
+
+\begin{proof}
+    Skipped
+\end{proof}
+
+In the intermediate value theorem, Theorem \ref{th:ivt} we simply choose two points in the
+domain $U$, and draw a line $\gamma$ between them. Then there must
+exist a point on that line ($\gamma(\tau)$) at which $F$ has exactly the average slope of the line between 
+$F(\mathbf y)$ and $ F(\mathbf x)$.
+
+Rearanging Equation \ref{eq:ivt} gives 
+$$F(\mathbf y) = F(\mathbf x) + \nabla F(\mathbf c) \cdot (\mathbf y - \mathbf x), \quad \mathbf c = \gamma(\tau)$$
+which we might consider the taylor polynomial of $0^{\textrm{th}}$ degree
+
+\begin{theorem}[Taylor polynomial degree 2]
+    \label{th:taylor}
+    \begin{equation}\label{eq:taylor}
+        F(\mathbf x + \mathbf h) = F(\mathbf x) + \mathbf h \cdot \nabla F(\mathbf x) + \mathbf h^{\rm{T}} [D^2 F(\mathbf x)] \mathbf h + \mathcal O (|\mathbf h|^3)
+    \end{equation}
+
+    Note that $[D^2 F(\mathbf x)]$ is a Hesse matrix, such that $\mathbf h^{\rm{T}} [D^2 F(\mathbf x)] \mathbf h$ is a regular matrix quadratic
+    form with column vector $\mathbf h$, while $\mathbf h \cdot \nabla F(\mathbf x)$ is the regular dot product between two $\mathbb R^n$-vectors
+\end{theorem}
+
+\begin{proof}
+    Skipped
+\end{proof}
+\section{Vector functions}
+
+\subsection{Implicit function theorem}
+
+
+
+\subsection{Inverse function theorem}
+
+\begin{theorem}[Inverse function theorem]
+    For $\vec F: U \subseteq \mathbb R^n \rightarrow \mathbb R^n$
+    where $U$ is open, $\mathbf x \in U$ is fixed and the
+    $n \times n$ Jacobi matrix $[ \vec F(\mathbf x)]$ is invertible:
+
+    $$\Rightarrow \exists \tilde{U} \ni \mathbf x; \quad \vec F: \tilde U \rightarrow \vec F(\tilde U)$$
+
+    is invertible.
+
+    Further:
+    $$[D (\vec F^{-1})](\mathbf y) = [D \vec F]^{-1} \circ \vec F^{-1}(\mathbf y)$$
+    is continuous on its domain $F(\tilde U)$
+
+    Note that $[D \vec F]$ is a Jacobi matrix to be inverted at $ \vec F^{-1}(\mathbf y)$, which
+    is a $\mathbb R^n$-vector
+    
+\end{theorem}
+
+\begin{corollary}[one-domentional inverse function theorem]
+    $f: \mathbb R \rightarrow \mathbb R$
+    Let $y = f(x)$. If $\diff{f}{x} = f'(x) \neq 0$:
+
+    $$\diff{f^{-1}}{y}(y) = \frac{1}{f'(x)} = \frac{1}{f'(f^{-1}(y))}$$
+    
+\end{corollary}
+
+
+
+\subsection{Lagrange multiplier}
+
+Let:
+$$F: U \subseteq \mathbb R^n \rightarrow \mathbb R$$
+$$G: U \subseteq \mathbb R^n \rightarrow \mathbb R$$
+
+We want to find the $n$-vector $\mathbf x \in U$ which minimizes $F(\mathbf x)$
+while guaranteeing $G(\mathbf x) = 0$
+
+\begin{theorem}[the Lagrange multiplier]
+\label{th:lagrangem}
+
+    Any local minimum of $F \in C^1(U, \mathbb R)$ subject to 
+    $\{ \mathbf x  \in U; G(\mathbf x) = 0\}$, for a $G \in C^1(U, \mathbb R)$
+    on an open $U \subseteq \mathbb R$
+    must be where
+
+    \begin{equation}\label{eq:lagrangem}
+        \nabla F = \lambda \cdot \nabla G
+    \end{equation}
+    
+
+    for a real number $\lambda$
+    
+\end{theorem}
+
+\begin{proof}
+    Let the $C^1$ curve $\gamma(t)$ be a parameterization of $\{\mathbf x; G(\mathbf x) = 0 \}$, where the minimum of $F$ along $\gamma(t)$ is $\mathbf x_0 = \gamma(t_0)$.   
+    A minimum of $F$ requires:
+
+    $$\diff{}{t} F(\gamma(t)) \Big |_{t = t_0}= 0 = \nabla F(\gamma(t_0)) \cdot \dot{\gamma}(t_0) \quad \textrm{(chain rule)}$$
+
+    Thus the gradient $\nabla F$ is orthogonal to the tangent of 
+    every parameterization $\gamma(t)$ of $\{\mathbf x; G(\mathbf x) = 0 \}$
+    at the minimum $\mathbf x_0$: $F(\mathbf x_0) \perp \dot{\gamma(t_0)}$
+
+    The minimum is by definition required to satisfy
+    $$G(\mathbf x_0) = 0 \Rightarrow \nabla G(\gamma(t_0)) \cdot \dot{\gamma}(t_0) = 0 \quad (\textrm{using the same } \gamma(t))$$
+    Which also gives $G(\mathbf x_0) \perp \dot{\gamma(t_0)}$
+
+    Thus:
+    $$\nabla F \parallel \nabla G$$
+    which we write using a real number $\lambda$:
+    $$\nabla F = \lambda \cdot \nabla G$$
+
+
+
+\end{proof}
+
+
+
+
+\section{Integrals}
+
+\subsection{Tornelli-Fubini}
+
+\subsection{Variable substitution}
+
+\subsection{Conservative Fields}
+
+\subsection{Greens theorem}
+
+\subsection{Gau{\ss}' theorem}
+
+\subsection{Kelvin-Stokes}
+
+
+\end{document}
+
+
