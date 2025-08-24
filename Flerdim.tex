@@ -14,6 +14,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 \newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
 
 \begin{document}
 \maketitle
@@ -23,11 +24,11 @@
 
 \section{Introduction}
 
-This document was written (loosely) based on the lectures given by 
+This is mostly a summary of the lectures given by 
 \href{https://www.ntnu.no/ansatte/mats.ehrnstrom}{Mats Ehrnström}
-for the course \href{https://www.ntnu.edu/studies/courses/MA1103#tab=omEmnet}{MA1103 Vector Calculus}
-the \href{https://wiki.math.ntnu.no/ma1103/2022v/start}{spring semester of 2022}. 
-This document is probably relevant for \href{https://www.ntnu.edu/studies/courses/TMA4105#tab=omEmnet}{TMA4105 Mathematics 2}
+for \href{https://www.ntnu.edu/studies/courses/MA1103#tab=omEmnet}{MA1103 Vector Calculus}
+\href{https://wiki.math.ntnu.no/ma1103/2022v/start}{spring 2022}. 
+Might also be relevant for \href{https://www.ntnu.edu/studies/courses/TMA4105#tab=omEmnet}{TMA4105 Mathematics 2}, idk
 
 \subsection{Notation}
 
@@ -65,7 +66,7 @@ This document is probably relevant for \href{https://www.ntnu.edu/studies/course
 \begin{definition}[Parametric curve]
     A parametric curve $\gamma$ is a continuous function
     $$\gamma: I \rightarrow \mathbb R^n$$
-    $$ t \mapsto (\gamma_1(t), \gamma_2(t), ..., \gamma_n(t))$$
+    $$ t \mapsto (\gamma_1(t), \gamma_2(t), ..., \gamma_n(t))^{\rm T}$$
     where $I \subseteq \mathbb R$ is an interval
     
 \end{definition}
@@ -85,12 +86,79 @@ This document is probably relevant for \href{https://www.ntnu.edu/studies/course
 
     
 \end{definition}
+
+\begin{theorem}[differentiation of curves]
+    let $u, v$ differentiable $I \rightarrow \mathbb R^n$
+
+    \begin{enumerate}
+        \item $(u \cdot v)' =  u' \cdot v + u \cdot v'$
+        \item $(u \times v)' =  u' \times v + u \times v'$
+        
+        \item For $\lambda: \mathbb R \rightarrow I$; $[u(\lambda(t))]' = u'(\lambda(t)) \lambda ' (t)$
+    \end{enumerate}
+
+
+\end{theorem}
+
+\subsection{Some special vectors}
+
+Assume $\gamma : I \mapsto \mathbb R ^n$ is smooth
+
+\begin{definition}[unit tangent]
+    $$T:= \frac{\dot \gamma(t)}{|\dot \gamma(t)|}$$
+    
+\end{definition}
+
+\begin{definition}(Curvature)
+    $$ \kappa := |\frac{dT}{ds}|$$
+    
+\end{definition}
+
+\begin{lemma}[computation of curvature]
+    $$\kappa = |\frac{dT}{ds}| = |\frac{dT}{dt} \frac{dt}{ds}| = |\frac{dT}{dt} | \cdot \frac{1}{|\dot \gamma(t)|}$$
+\end{lemma}
+
+\begin{definition}[unit normal]
+    $$N:= \frac{dT / ds}{|dT / ds|} = \frac{1}{\kappa} \frac{dT}{ds} = \frac{\frac{d}{dt}T}{|\frac{d}{dt}T|}$$
+
+    
+\end{definition}
+
+Note: As $|T(t)| = 1$, 
+$\frac{d}{ds} [T(t) T(t)] = 2 \frac{d}{ds} T(t) \cdot T(t) = \frac{d}{ds} 1 = 0$
+Thus we have found a vector, $\frac{d}{ds} T(t)$ which must be perpendicular to $T(t)$.
+The unit normal also happens to tell us in which direction the
+curve is bending towards at location $(t, \gamma(t))$.
+
+Note also that $\kappa$ is to $N$, as $|\dot \gamma(t)|$ is to $T$
+
+\begin{definition}[binormal vector]
+    For $n = 3$, as in $\mathbb R ^n$
+
+    $$B = T \times N$$
+
+    Then $B \perp T, B \perp N, |B| = 1$
+    
+\end{definition}
+
+
+
+
+
 \subsection{Polar coordinates}
+
+
+
 
 
 \section{Differentiation}
 
 \subsection{Schwarz' theorem}
+
+\begin{theorem}[Schwarz]
+    If all of 
+    
+\end{theorem}
 
 \subsection{Jacobi matrix}
 
